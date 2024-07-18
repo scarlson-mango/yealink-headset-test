@@ -1,0 +1,471 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@yealink_dev/yealink-node-sdk</title>
+	<meta name="description" content="Documentation for @yealink_dev/yealink-node-sdk">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@yealink_dev/yealink-node-sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@yealink_dev/yealink-node-sdk</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p>Yealink Node.js SDK</p>
+				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+					<h1>Table of Contents</h1>
+				</a>
+				<ul>
+					<li><a href="#table-of-contents">Table of Contents</a><ul>
+							<li><a href="#pre-requisite">Pre-requisite</a></li>
+							<li><a href="#installation">Installation</a></li>
+							<li><a href="#debugging-and-logging">Debugging and Logging</a></li>
+							<li><a href="#api-reference">API Reference</a></li>
+							<li><a href="#examples">Examples</a><ul>
+									<li><a href="#simple-button-events-example-using-javascript-and-plain-promises">Simple button events example using javascript and plain promises</a></li>
+									<li><a href="#simple-button-events-example-using-typescript-and-plain-promises">Simple button events example using typescript and plain promises</a></li>
+									<li><a href="#multiple-device-management-with-typescript-and-asyncawait">Multiple device management with typescript and async/await</a></li>
+								</ul>
+							</li>
+							<li><a href="#sequence-diagrams">Sequence diagrams</a></li>
+							<li><a href="#setup-vscode">Setup VSCode</a><ul>
+									<li><a href="#windows">Windows</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#pre-requisite" id="pre-requisite" style="color: inherit; text-decoration: none;">
+					<h2>Pre-requisite</h2>
+				</a>
+				<ol>
+					<li><p>Node.js v8.x or later.</p>
+					</li>
+					<li><p><strong>On MacOS:</strong> <code>xcode</code> &amp; <code>python 2.7</code>. By default, Python is installed on macOS but make sure correct version(2.7.x) is installed. Install Xcode from App store or download it from <a href="https://developer.apple.com/xcode/download/">here</a>.</p>
+					</li>
+					<li><p><strong>On Windows:</strong> <code>Visual C++ Build Tools</code> &amp; <code>Python 2.7</code>. You can install all of these by following any of the below mentioned steps.</p>
+						<p> 3.1. <strong>During Node.js installation</strong> By ticking the checkbox when prompted during Node.js installation for <code>Tools for Native modules</code>, this installs both <code>Visual C++ Build Tools</code> &amp; <code>Python 2.7</code>. <strong>Note</strong> This is prompted only for Windows platform. For other platforms like Linux or MAC, C++ compilation tools has to be installed separately as mentioned in other steps.</p>
+						<p> 3.2. Both <code>Visual C++ Build Tools</code> &amp; <code>Python 2.7</code> can also be installed using command <code>npm install --global --production --add-python-to-path windows-build-tools</code>. To know more about this tool, see <a href="https://github.com/felixrieseberg/windows-build-tools">this link.</a>. <strong>Note</strong> For executing this command through <code>Windows Command Prompt</code> or <code>Windows PowerShell</code>, they should be ran in Administrator mode.</p>
+					</li>
+					<li><p><strong>All Platforms:</strong> <code>node-gyp</code>. You can install this using command <code>npm install -g node-gyp</code>. To know more about this, see <a href="https://www.npmjs.com/package/node-gyp">this link</a></p>
+					</li>
+					<li><p><strong>For Electron.JS:</strong> If you are using <code>asar</code> packaging then you may need to <code>unpack</code> some of the resources used in this module. These resources are native library files i.e <code>libyealinkusbsdk.dll</code>, <code>libyealinkusbsdk.dylib</code> &amp; <code>libyealinkusbsdk.so</code>, which is stored in a <code>build\Release</code> folder. By default latest electron builder will automatically unpack, but if it does not work then you can provide below option to your build process. To know more, see <a href="https://www.electron.build/configuration/configuration">this link</a></p>
+					</li>
+				</ol>
+				<pre><code class="language-javascript"><span class="hljs-string">"build"</span>: {
+    <span class="hljs-string">"asarUnpack"</span>: [<span class="hljs-string">"node_modules/@yealink_dev/yealink-node-sdk"</span>]
+}</code></pre>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>npm install @yealink_dev/yealink-node-sdk</p>
+				<a href="#debugging-and-logging" id="debugging-and-logging" style="color: inherit; text-decoration: none;">
+					<h2>Debugging and Logging</h2>
+				</a>
+				<p>Below environment variables are defined for logging and debugging purpose. User can change the values as per preference.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Environment Variable</th>
+							<th>Value</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>YEALINKSDK_TRACE_LEVEL</td>
+							<td>error, warning, info(default), verbose</td>
+							<td>Log levels</td>
+						</tr>
+						<tr>
+							<td>YEALINKSDK_RESOURCE_PATH</td>
+							<td><strong>On Mac:</strong> ~/Library/Application Support/YealinkSdk/ <strong>On Windows:</strong> %appdata%/YealinkSdk</td>
+							<td>This determine the system path where logs and device related files are written.</td>
+						</tr>
+				</tbody></table>
+				<a href="#api-reference" id="api-reference" style="color: inherit; text-decoration: none;">
+					<h2>API Reference</h2>
+				</a>
+				<p>API doc is in html format. See doc folder inside installed module <code>node_modules\@yealink_dev\yealink-node-sdk\dist\doc</code> and open <code>index.html</code>.</p>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
+				<p>For all examples, user should first register the app from yealink teams to get appID. User should pass this appID to <code>initSdk</code> in order to initialize the yealink module:</p>
+				<a href="#simple-button-events-example-using-javascript-and-plain-promises" id="simple-button-events-example-using-javascript-and-plain-promises" style="color: inherit; text-decoration: none;">
+					<h3>Simple button events example using javascript and plain promises</h3>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> sdk = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@yealink_dev/yealink-node-sdk"</span>);
+sdk.initSdk(<span class="hljs-string">'test_App_Id'</span>).then(<span class="hljs-function">(<span class="hljs-params">ylSdk</span>) =&gt;</span> { <span class="hljs-comment">// test_App_Id is appId here</span>
+    ylSdk.RegEvent(<span class="hljs-string">'attach'</span>, (deviceImpl) =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'press any key on yealink device '</span> + deviceImpl.deviceName);
+
+        deviceImpl.RegEvent(<span class="hljs-string">'btnPress'</span>, (btnType, btnValue) =&gt; {
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'new input from device is received: '</span>, sdk.DeviceBtnType[btnType], btnValue);
+        });
+    });    
+});</code></pre>
+				<a href="#simple-button-events-example-using-typescript-and-plain-promises" id="simple-button-events-example-using-typescript-and-plain-promises" style="color: inherit; text-decoration: none;">
+					<h3>Simple button events example using typescript and plain promises</h3>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { initSdk, DeviceBtnType } <span class="hljs-keyword">from</span> <span class="hljs-string">'@yealink_dev/yealink-node-sdk'</span>;
+initSdk(<span class="hljs-string">'test_App_Id'</span>).then(<span class="hljs-function">(<span class="hljs-params">ylSdk</span>) =&gt;</span> { <span class="hljs-comment">// test_App_Id is appId here</span>
+    ylSdk.RegEvent(<span class="hljs-string">'attach'</span>, <span class="hljs-function">(<span class="hljs-params">deviceImpl</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'press any key on yealink device '</span> + deviceImpl.deviceName);
+
+        deviceImpl.RegEvent(<span class="hljs-string">'btnPress'</span>, <span class="hljs-function">(<span class="hljs-params">btnType, btnValue</span>) =&gt;</span> {
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'new input from device is received: '</span>, DeviceBtnType[btnType], btnValue);
+        });
+    });   
+});</code></pre>
+				<a href="#for-more-examples-see-srcsimpletest" id="for-more-examples-see-srcsimpletest" style="color: inherit; text-decoration: none;">
+					<h3>For more examples, see src/simpletest</h3>
+				</a>
+				<a href="#multiple-device-management-with-typescript-and-asyncawait" id="multiple-device-management-with-typescript-and-asyncawait" style="color: inherit; text-decoration: none;">
+					<h3>Multiple device management with typescript and async/await</h3>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { initSdk } <span class="hljs-keyword">from</span> <span class="hljs-string">'@yealink_dev/yealink-node-sdk'</span>;
+
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">let</span> ylSdk = <span class="hljs-keyword">await</span> initSdk(<span class="hljs-params">'test_App_Id'</span>); <span class="hljs-comment">// test_App_Id is appId here</span>
+
+    <span class="hljs-keyword">await</span> ylSdk.firseScanForDeviceDoneAsync(<span class="hljs-params"></span>); <span class="hljs-comment">// Wait for all pre-attached devices to be scanned.</span>
+
+    <span class="hljs-keyword">const</span> deviceInstanceList = ylSdk.getAttachedDevices(<span class="hljs-params"></span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-params">deviceInstanceList.length&lt;2</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-params">'please make sure 2 yealink devices are attached'</span>);
+    }
+
+    <span class="hljs-keyword">const</span> firstDevice = deviceInstanceList[0];
+    <span class="hljs-keyword">await</span> firstDevice.ringAsync(<span class="hljs-params"></span>);
+
+    <span class="hljs-keyword">const</span> secondDevice = deviceInstanceList[1];
+    <span class="hljs-keyword">await</span> secondDevice.ringAsync(<span class="hljs-params"></span>);
+
+    <span class="hljs-comment">// Dispose yealink sdk to enable node process to shutdown.</span>
+    <span class="hljs-keyword">await</span> ylSdk.disposeAsync(<span class="hljs-params"></span>);
+}</span>)<span class="hljs-params">()</span>;</span></code></pre>
+				<a href="#setup-vscode" id="setup-vscode" style="color: inherit; text-decoration: none;">
+					<h2>Setup VSCode</h2>
+				</a>
+				<p>The project includes config files for debugging typescript and C++ source files
+					in <a href="https://code.visualstudio.com/">Visual Studio Code</a> via the
+					<a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C++ extension</a>,
+					for both Windows. The configuration files work without any
+					modification, provided that you set up your environment first, by installing
+				the necessary tools and defining some environment variable.</p>
+				<p>To debug a C++ file, open a typescript file referencing the C++ file and start
+					the debugger (Running the debugger on C++ files directly won&#39;t work). Make sure
+					the &quot;Run&quot;-dropdown at the top of the debugging-sidebar is set to &quot;Current TS
+				File - native code only (&lt;your operating system&gt;)&quot;</p>
+				<p>Below, the setup steps for Windows.</p>
+				<a href="#windows" id="windows" style="color: inherit; text-decoration: none;">
+					<h3>Windows</h3>
+				</a>
+				<p>You can more or less follow the instruction in
+					<a href="https://code.visualstudio.com/docs/cpp/config-msvc">the VSCode C++ extension guide</a>.
+					Then, you need to make sure all project <a href="#pre-requisite">pre-requisites</a> are
+				installed correctly, and finally set the following environment variables:</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Environment Variable</th>
+							<th>Value</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>YEALINK_NODESDK_WIN_NODE_GYP_CACHE_PATH</td>
+							<td>eg. %appdata%\Local\node-gyp\Cache\12.16.3\include\node</td>
+							<td>Used by the C/C++ extension to resolve include paths</td>
+						</tr>
+						<tr>
+							<td>YEALINK_NODESDK_WIN_CPP_COMPILER_PATH</td>
+							<td>eg. C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.25.28610/bin/Hostx64/x64/cl.exe</td>
+							<td>Used by the C/C++ extension to infer the path to the C++ standard library header files</td>
+						</tr>
+				</tbody></table>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/devicetypecallbacks.html">Device<wbr>Type<wbr>Callbacks</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/ylsdkimplcallbacks.html">YLSdk<wbr>Impl<wbr>Callbacks</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/addonlogseverity.html" class="tsd-kind-icon">Addon<wbr>Log<wbr>Severity</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/audiomodes.html" class="tsd-kind-icon">Audio<wbr>Modes</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/btlisttype.html" class="tsd-kind-icon">Bt<wbr>List<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/busylightstatus.html" class="tsd-kind-icon">Busylight<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/callaction.html" class="tsd-kind-icon">Call<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/callreturn.html" class="tsd-kind-icon">Call<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/cameradirectioncmd.html" class="tsd-kind-icon">Camera<wbr>Direction<wbr>Cmd</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/camerasmarttrackingopt.html" class="tsd-kind-icon">Camera<wbr>Smart<wbr>Tracking<wbr>Opt</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/camerazoomcmd.html" class="tsd-kind-icon">Camera<wbr>Zoom<wbr>Cmd</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/controltype.html" class="tsd-kind-icon">Control<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/devicebtntype.html" class="tsd-kind-icon">Device<wbr>Btn<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/deviceconnectiontype.html" class="tsd-kind-icon">Device<wbr>Connection<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/devicefeature.html" class="tsd-kind-icon">Device<wbr>Feature</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/equalizermode.html" class="tsd-kind-icon">Equalizer<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/errorstatus.html" class="tsd-kind-icon">Error<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/firmwareeventstatus.html" class="tsd-kind-icon">Firmware<wbr>Event<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/firmwareeventtype.html" class="tsd-kind-icon">Firmware<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/hidworkstate.html" class="tsd-kind-icon">Hid<wbr>Work<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/logeventtype.html" class="tsd-kind-icon">Log<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/remotemmiinput.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Input</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/remotemmipriority.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Priority</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/remotemmisequence.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Sequence</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/remotemmitype.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/returncode.html" class="tsd-kind-icon">Return<wbr>Code</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/settingdatatype.html" class="tsd-kind-icon">Setting<wbr>Data<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/uploadeventstatus.html" class="tsd-kind-icon">Upload<wbr>Event<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wizardmodes.html" class="tsd-kind-icon">Wizard<wbr>Modes</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/deviceimpl.html" class="tsd-kind-icon">Device<wbr>Impl</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/ylsdkimpl.html" class="tsd-kind-icon">YLSdk<wbr>Impl</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/btpaireddevicelist.html" class="tsd-kind-icon">Bt<wbr>Paired<wbr>Device<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/camerasmarttracking.html" class="tsd-kind-icon">Camera<wbr>Smart<wbr>Tracking</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/configparamscloud.html" class="tsd-kind-icon">Config<wbr>Params<wbr>Cloud</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactinfo.html" class="tsd-kind-icon">Contact<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactinfolist.html" class="tsd-kind-icon">Contact<wbr>Info<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/datetime.html" class="tsd-kind-icon">Date<wbr>Time</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/devicecamerapresets.html" class="tsd-kind-icon">Device<wbr>Camera<wbr>Presets</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deviceinfo.html" class="tsd-kind-icon">Device<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/devicesettings.html" class="tsd-kind-icon">Device<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/firmwareinfo.html" class="tsd-kind-icon">Firmware<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/nativeaddonlogconfig.html" class="tsd-kind-icon">Native<wbr>Addon<wbr>Log<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/remotemmiactionoutput.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Action<wbr>Output</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/remotemmidefinition.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/remotemmioutput.html" class="tsd-kind-icon">Remote<wbr>Mmi<wbr>Output</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/settinginfo.html" class="tsd-kind-icon">Setting<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#deviceimplevents" class="tsd-kind-icon">Device<wbr>Impl<wbr>Events</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#eventemitter" class="tsd-kind-icon">Event<wbr>Emitter</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#ylsdkimplevents" class="tsd-kind-icon">YLSdk<wbr>Impl<wbr>Events</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#yealinkerror" class="tsd-kind-icon">Yealink<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#_eventemitter" class="tsd-kind-icon">_<wbr>Event<wbr>Emitter</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#deviceeventslist" class="tsd-kind-icon">Device<wbr>Events<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#cachedlogconfig" class="tsd-kind-icon">cached<wbr>Log<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#events" class="tsd-kind-icon">events</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#util" class="tsd-kind-icon">util</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#yleventslist" class="tsd-kind-icon">yl<wbr>Events<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ylsdk" class="tsd-kind-icon">yl<wbr>Sdk</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ylsdkinterface" class="tsd-kind-icon">yl<wbr>Sdk<wbr>Interface</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getnativeaddonlogconfig" class="tsd-kind-icon">Get<wbr>Native<wbr>Addon<wbr>Log<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#nativeaddonlog" class="tsd-kind-icon">Native<wbr>Addon<wbr>Log</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#nativelogerror" class="tsd-kind-icon">Native<wbr>Log<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#nativeloginfo" class="tsd-kind-icon">Native<wbr>Log<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#nativelogverbose" class="tsd-kind-icon">Native<wbr>Log<wbr>Verbose</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#initsdk" class="tsd-kind-icon">init<wbr>Sdk</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isnodejs" class="tsd-kind-icon">is<wbr>Node<wbr>Js</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#maplogvalue" class="tsd-kind-icon">map<wbr>Log<wbr>Value</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
